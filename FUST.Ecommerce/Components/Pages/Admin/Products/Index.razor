@@ -1,0 +1,46 @@
+﻿@page "/admin/products"
+@using FUST.Ecommerce.Models
+
+<h3>Products</h3>
+<hr />
+<a class="btn btn-primary" href="/admin/products/create">Create product</a>
+<hr />
+@if(_products is null)
+{
+	<p>Loading...</p>
+}
+else if (_products.Count() == 0)
+{
+	<p>List is empty</p>
+}
+else
+{
+	<table class="product"
+	style="width: 100%;">
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Price</th>
+			<th>Category</th>
+			<th></th>
+		</tr>
+		@foreach (var p in _products)
+		{
+			@if (p is not null)
+			{
+				<tr>
+					<td>@p.Id</td>
+					<td>@p.Name</td>
+					<td>@p.Price</td>
+					<td>@p.CategoryName - @p.CategoryId</td>
+					<td>
+						<div style="gap:5px">
+							<a class="btn btn-primary" href="@($"/admin/products/edit/{p.Id}")">Edit</a>
+							<a class="btn btn-primary" href="@($"/admin/products/delete/{p.Id}")">Delete</a>
+						</div>
+					</td>
+				</tr>
+			}
+		}
+	</table>
+}

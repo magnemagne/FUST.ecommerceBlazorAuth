@@ -1,0 +1,49 @@
+﻿@page "/admin/products/create"
+@using FUST.Ecommerce.Models
+
+
+<h3>Create</h3>
+
+<EditForm EditContext="_editContext" OnValidSubmit="Save">
+	<DataAnnotationsValidator />
+
+	<div>
+		<label for="txtName">Name:</label>
+		<InputText class="form-control"
+				   id="txtName"
+				   @bind-Value="Input.Name" />
+		<ValidationMessage For="@(() => Input.Name)" />
+	</div>
+
+	<div>
+		<label for="txtPrice">Price:</label>
+		<InputNumber class="form-control"
+					 id="txtPrice"
+					 @bind-Value="Input.Price" />
+		<ValidationMessage For="@(() => Input.Price)" />
+	</div>
+
+	<div>
+		<label for="txtCategoryId">Category Id:</label>
+		<InputNumber class="form-control"
+					 id="txtCategoryId"
+					 @bind-Value="Input.CategoryId" />
+		<ValidationMessage For="@(() => Input.CategoryId)" />
+	</div>
+
+	<div>
+		<label for="txtDesc">Description:</label>
+		<InputText class="form-control"
+				   id="txtDesc"
+				   @bind-Value="Input.Description" />
+		<ValidationMessage For="@(() => Input.Description)" />
+	</div>
+
+	<hr />
+	<div style="width:100%">
+		<button type="submit" class="btn btn-primary">Insert</button>
+		<a href="/admin/products" class="btn btn-xs btn-secondary">Back to list</a>
+	</div>
+</EditForm>
+<hr />
+<p>@StatusConstraints</p>

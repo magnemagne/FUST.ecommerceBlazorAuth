@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using FUST.Ecommerce.Components;
 using FUST.Ecommerce.Components.Account;
 using FUST.Ecommerce.Data;
+using FUST.Ecommerce.Services;
+using FUST.Ecommerce.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,10 @@ builder.Services.AddScoped<IdentityUserAccessor>();
 builder.Services.AddScoped<IdentityRedirectManager>();
 builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
 
+builder.Services.AddScoped<ICategoryDataAccess, CategoryDataAccess>();
+builder.Services.AddScoped<IOrderDataAccess, OrderDataAccess>();
+builder.Services.AddScoped<IProductDataAccess, ProductDataAccess>();
+
 builder.Services.AddAuthentication(options =>
     {
         options.DefaultScheme = IdentityConstants.ApplicationScheme;
@@ -25,7 +31,7 @@ builder.Services.AddAuthentication(options =>
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
