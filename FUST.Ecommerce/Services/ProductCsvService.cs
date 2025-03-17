@@ -8,7 +8,7 @@ namespace FUST.Ecommerce.Services
 {
 	public class ProductCsvService : IProductCsvService
 	{
-		public Task<IEnumerable<Product>> convertCvsToProductList(string csv)
+		public Task<IEnumerable<Product>> convertCsvToProductList(string csv)
 		{
 			var list = new List<Product>();
 			var lines = csv.Split(Environment.NewLine).ToList();
@@ -25,11 +25,6 @@ namespace FUST.Ecommerce.Services
 			}
 
 			return Task.FromResult((IEnumerable<Product>)list);
-			//using var sr = new StreamReader(csv);
-			//using var csvReader = new CsvReader(sr, CultureInfo.InvariantCulture);
-
-			//var records = csvReader.GetRecords<Product>().ToList();
-			//return records;
 		}
 	}
 }	

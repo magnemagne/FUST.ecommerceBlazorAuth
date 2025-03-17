@@ -16,6 +16,24 @@ namespace FUST.Ecommerce.Services
 				?? throw new Exception("ConnectionString 'DefaultConnection' not found.");
 			_logger = logger;
 		}
+
+		public async Task AddCategoriesAsync(IEnumerable<Category> categories)
+		{
+			using var connection = new MySqlConnection(_connectionString);
+			await connection.OpenAsync();
+			const string query = """
+            INSERT INTO categories (name)
+            VALUES (@Name);
+            """;
+
+			MySqlTransaction transc = connection.BeginTransaction();
+
+			int rowsAffected = await connection.ExecuteAsync(query,
+											   categories,
+											   transaction: transc);
+			transc.Commit();
+		}
+
 		public async Task<bool> AddCategoryAsync(Category category)
 		{
 			using var connection = new MySqlConnection(_connectionString);

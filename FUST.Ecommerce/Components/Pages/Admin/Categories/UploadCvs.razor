@@ -1,12 +1,13 @@
-﻿@page "/admin/products/upload"
+﻿@page "/admin/categories/upload"
 @using Microsoft.AspNetCore.Authorization
 @attribute [Authorize(Roles = "Admin, Superuser")]
 
 <h3>Upload CSV</h3>
+
 	<InputFile OnChange="Upload" class="form-control" style="margin-left: auto;margin-right: auto; width: 50%;" />
 	<div style="height:10px"></div>
 
-<a href="/admin/products/" class="btn btn-xs btn-secondary">Back to list</a>
+<a href="/admin/categories/" class="btn btn-xs btn-secondary">Back to list</a>
 <hr />
 <p>@Status</p>
 

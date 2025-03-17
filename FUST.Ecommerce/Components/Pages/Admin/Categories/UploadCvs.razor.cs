@@ -2,9 +2,9 @@
 using FUST.Ecommerce.Services;
 using Microsoft.AspNetCore.Components.Forms;
 
-namespace FUST.Ecommerce.Components.Pages.Admin.Products
+namespace FUST.Ecommerce.Components.Pages.Admin.Categories
 {
-	public partial class UploadCvs(IProductCsvService cvsData, IProductDataAccess data)
+	public partial class UploadCvs(ICategoryCsvService cvsData, ICategoryDataAccess data)
 	{
 		public string Status;
 
@@ -15,8 +15,10 @@ namespace FUST.Ecommerce.Components.Pages.Admin.Products
 			using var streamReader = new StreamReader(e.File.OpenReadStream());
 			var text = await streamReader.ReadToEndAsync();
 			
-			IEnumerable<Product> products = await cvsData.convertCsvToProductList(text);
-			await data.AddProductsAsync(products);
+			IEnumerable<Category> categories = await cvsData.convertCvsToProductList(text);
+			await data.AddCategoriesAsync(categories);
+
+			
 		}
 
 	}
