@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components.Forms;
 
 namespace FUST.Ecommerce.Components.Pages.Admin.Products
 {
-	public partial class UploadCvs(IProductCsvService cvsData, IProductDataAccess data)
+	public partial class UploadCsv (IProductCsvService cvsData, IProductDataAccess data)
 	{
 		public string Status;
 

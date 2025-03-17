@@ -24,6 +24,7 @@ builder.Services.AddScoped<ICategoryDataAccess, CategoryDataAccess>();
 builder.Services.AddScoped<IOrderDataAccess, OrderDataAccess>();
 builder.Services.AddScoped<IProductDataAccess, ProductDataAccess>();
 builder.Services.AddScoped<IProductCsvService, ProductCsvService>();
+builder.Services.AddScoped<ICategoryCsvService, CategoryCsvService>();
 
 builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
 	.AddRoles<IdentityRole>()
