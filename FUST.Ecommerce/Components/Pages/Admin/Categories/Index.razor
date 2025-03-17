@@ -1,0 +1,43 @@
+﻿@page "/admin/categories"
+@using FUST.Ecommerce.Models
+
+<h3>Categories</h3>
+<hr />
+<a class="btn btn-primary" href="/admin/categories/create">Create category</a>
+<hr />
+@if(_categories is null)
+{
+	<p>Loading...</p>
+}
+else if (_categories.Count() == 0)
+{
+	<p>List is empty</p>
+}
+else
+{
+	<table class="category"
+	style="width: 100%;">
+		<tr>
+			<th>ID</th>
+			<th>Title</th>
+			<th></th>
+		</tr>
+		@foreach (var p in _categories)
+		{
+	
+			@if (p is not null)
+			{
+				<tr>
+					<td>@p.Id</td>
+					<td>@p.Name</td>
+					<td>
+						<div style="gap:5px">
+							<a class="btn btn-primary" href="@($"/admin/categories/edit/{p.Id}")">Edit</a>
+							<a class="btn btn-primary" href="@($"/admin/categories/delete/{p.Id}")">Delete</a>
+						</div>
+					</td>
+				</tr>
+			}
+		}
+	</table>
+}

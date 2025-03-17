@@ -1,0 +1,35 @@
+﻿@page "/admin/categories/edit/{id:int}"
+@using FUST.Ecommerce.Models
+
+
+<h3>Update</h3>
+
+<EditForm EditContext="_editContext" OnValidSubmit="Update">
+	<DataAnnotationsValidator />
+
+	<div>
+		<label for="txtId">Id:</label>
+		<InputNumber class="form-control"
+				   id="txtId"
+				   disabled
+				   @bind-Value="Input.Id" />
+		<ValidationMessage For="@(() => Input.Id)" />
+	</div>
+
+	<div>
+		<label for="txtName">Title:</label>
+		<InputText class="form-control"
+				   id="txtName"
+				   @bind-Value="Input.Name" />
+		<ValidationMessage For="@(() => Input.Name)" />
+	</div>
+
+	<hr />
+	<div style="width:100%">
+		<button type="submit" class="btn btn-primary">Update</button>
+		<a href="/admin/categories/" class="btn btn-xs btn-secondary">Back to list</a>
+	</div>
+</EditForm>
+<hr />
+<p>@StatusConstraints</p>
+
