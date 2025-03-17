@@ -6,7 +6,7 @@ using System.Security.Claims;
 using FUST.Ecommerce.Services;
 using FUST.Ecommerce.Models;
 
-namespace FUST.Ecommerce.Components.Pages.Admin.Products
+namespace FUST.Ecommerce.Components.Pages.User.Products
 {
 	public partial class Index(IProductDataAccess data, ICategoryDataAccess dataCategory, UserManager<ApplicationUser> UserManager)
 	{

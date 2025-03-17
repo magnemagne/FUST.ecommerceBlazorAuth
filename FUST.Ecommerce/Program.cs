@@ -6,6 +6,8 @@ using FUST.Ecommerce.Components.Account;
 using FUST.Ecommerce.Data;
 using FUST.Ecommerce.Services;
 using FUST.Ecommerce.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using FUST.Ecommerce.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,15 @@ builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuth
 builder.Services.AddScoped<ICategoryDataAccess, CategoryDataAccess>();
 builder.Services.AddScoped<IOrderDataAccess, OrderDataAccess>();
 builder.Services.AddScoped<IProductDataAccess, ProductDataAccess>();
+builder.Services.AddScoped<IProductCsvService, ProductCsvService>();
+
+builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+	.AddRoles<IdentityRole>()
+	.AddEntityFrameworkStores<ApplicationDbContext>()
+	.AddSignInManager()
+	.AddRoleManager<RoleManager<IdentityRole>>()
+	.AddRoleStore<RoleStore<IdentityRole, ApplicationDbContext>>()
+	.AddDefaultTokenProviders();
 
 builder.Services.AddAuthentication(options =>
     {
@@ -66,5 +77,6 @@ app.MapRazorComponents<App>()
 
 // Add additional endpoints required by the Identity /Account Razor components.
 app.MapAdditionalIdentityEndpoints();
+app.MapAdminMaker();
 
 app.Run();

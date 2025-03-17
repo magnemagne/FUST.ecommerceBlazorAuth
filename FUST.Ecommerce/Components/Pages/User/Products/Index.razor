@@ -1,12 +1,10 @@
-﻿@page "/admin/products"
+﻿@page "/user/products"
 @using FUST.Ecommerce.Models
 @using Microsoft.AspNetCore.Authorization
-@attribute [Authorize(Roles = "Admin, Superuser")]
 
 <h3>Products</h3>
 <hr />
 <a class="btn btn-primary" href="/admin/products/create">Create product</a>
-<a class="btn btn-primary" href="/admin/upload">Upload products</a>
 <hr />
 @if(_products is null)
 {
@@ -38,8 +36,7 @@ else
 					<td>@p.CategoryName - @p.CategoryId</td>
 					<td>
 						<div style="gap:5px">
-							<a class="btn btn-primary" href="@($"/admin/products/edit/{p.Id}")">Edit</a>
-							<a class="btn btn-primary" href="@($"/admin/products/delete/{p.Id}")">Delete</a>
+							<a class="btn btn-primary" href="@($"/user/products/details/{p.Id}")">Details</a>
 						</div>
 					</td>
 				</tr>

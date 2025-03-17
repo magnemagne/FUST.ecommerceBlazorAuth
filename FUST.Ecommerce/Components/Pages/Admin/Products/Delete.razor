@@ -1,4 +1,6 @@
 ﻿@page "/admin/products/delete/{id:int}"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Admin, Superuser")]
 <h2 id="status">Are you sure?</h2>
 <hr />
 <div style="width:100%;">

@@ -1,4 +1,7 @@
 ﻿@page "/admin/categories"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Admin, Superuser")]
+
 @using FUST.Ecommerce.Models
 
 <h3>Categories</h3>

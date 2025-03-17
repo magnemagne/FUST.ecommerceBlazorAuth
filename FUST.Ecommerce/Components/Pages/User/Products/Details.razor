@@ -1,0 +1,30 @@
+﻿@page "/user/products/details/{id:int}"
+<h3>Details</h3>
+@if (!HasProductBeenFound)
+{
+	<h1>Product does not exist</h1>
+}
+else
+{
+	<div class="card">
+		<h5 class="card-header">@foundProduct.Name - @foundProduct.Id</h5>
+		<div class="card-body">
+			<Body>
+				<p class="card-text">
+					Category: <strong>@foundProduct.CategoryName - @foundProduct.CategoryId</strong>
+					<hr />
+					Description: <strong>@foundProduct.Description</strong>
+					<hr />
+						Price: <strong>@foundProduct.Price</strong> $
+					<hr />
+				</p>
+			</Body>
+			<div class="card-footer">
+				<a href="/user/products/" class="btn btn-xs btn-secondary">Back to list</a>
+			</div>
+		</div>
+	</div>
+}
+@code {
+
+}

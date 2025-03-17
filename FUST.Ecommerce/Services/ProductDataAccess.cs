@@ -1,6 +1,9 @@
 ﻿using Dapper;
 using FUST.Ecommerce.Models;
+using Microsoft.Data.SqlClient;
 using MySqlConnector;
+using System.Collections.Generic;
+using System.Text;
 
 namespace FUST.Ecommerce.Services
 {
@@ -83,6 +86,23 @@ namespace FUST.Ecommerce.Services
 					id = @Id;
 				""";
 			return await connection.ExecuteAsync(query, product) == 1 ? true : false;
+		}
+
+		public async Task AddProductsAsync(IEnumerable<Product> products)
+		{
+			using var connection = new MySqlConnection(_connectionString);
+			await connection.OpenAsync();
+			const string query = """
+            INSERT INTO products (name, price, categoryId, description)
+            VALUES (@Name, @Price, @CategoryId, @Description);
+            """;
+
+			MySqlTransaction transc = connection.BeginTransaction();
+
+			int rowsAffected = await connection.ExecuteAsync(query,
+											   products,
+											   transaction: transc);
+			transc.Commit();
 		}
 	}
 }
